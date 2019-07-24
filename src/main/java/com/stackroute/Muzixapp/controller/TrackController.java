@@ -1,7 +1,6 @@
 package com.stackroute.Muzixapp.controller;
 
 import com.stackroute.Muzixapp.domain.Track;
-//import com.stackroute.Muzixapp.exceptions.TrackAlreadyExistsException;
 import com.stackroute.Muzixapp.service.TrackService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,37 +12,48 @@ import java.util.List;
 @RequestMapping(value = "api/v2")
 public class TrackController {
     TrackService trackService;
-    public TrackController(TrackService trackService)
-    {
-        this.trackService=trackService;
+
+    public TrackController(TrackService trackService) {
+        this.trackService = trackService;
     }
+
     @PostMapping("track")
-    public ResponseEntity<?> saveTrack(@RequestBody Track track){
+    public ResponseEntity<?> saveTrack(@RequestBody Track track) {
         ResponseEntity responseEntity;
-        try{
+        try {
             trackService.saveTrack(track);
-            responseEntity=new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
-        }catch(Exception ex){
-            responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
+        } catch (Exception ex) {
+            responseEntity = new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
+
     @GetMapping("track")
-    public ResponseEntity<?> getTracks(){
-        return new ResponseEntity<List<Track>>(trackService.getAllTracks(),HttpStatus.OK);
+    public ResponseEntity<?> getTracks() {
+        return new ResponseEntity<List<Track>>(trackService.getAllTracks(), HttpStatus.OK);
     }
+
     @GetMapping("track/{id}")
-    public ResponseEntity<?> getTrackById(@PathVariable(value="id") Integer id){
-        return new ResponseEntity<Track>(trackService.getTrackById(id),HttpStatus.OK);
+    public ResponseEntity<?> getTrackById(@PathVariable(value = "id") Integer id){
+        return new ResponseEntity<Track>(trackService.getTrackById(id), HttpStatus.OK);
     }
+
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteTrack(@PathVariable(value = "id")Integer id){
+    public ResponseEntity<?> deleteTrack(@PathVariable(value = "id") Integer id) {
         trackService.deleteTrack(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @PutMapping("track")
-    public ResponseEntity<Track> updateUser(@RequestBody Track track){
+    public ResponseEntity<Track> updateUser(@RequestBody Track track) {
         trackService.updateTrack(track);
-        return new ResponseEntity<Track>(track,HttpStatus.OK);
+        return new ResponseEntity<Track>(track, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getTrackByName(@RequestParam(value = "name") String name) {
+        Track getTrack = (Track) trackService.findByName(name);
+        return new ResponseEntity<Track>(getTrack, HttpStatus.OK);
     }
 }

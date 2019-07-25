@@ -1,3 +1,4 @@
+
 package com.stackroute.Muzixapp.controller;
 
 import com.stackroute.Muzixapp.domain.Track;
@@ -23,7 +24,7 @@ public class TrackController {
     }
 
     @PostMapping("track")
-    public ResponseEntity<?> saveTrack(@RequestBody Track track){
+    public ResponseEntity<?> saveTrack(@RequestBody Track track) throws TrackAlreadyExistsException{
         ResponseEntity responseEntity;
         try{
             trackService.saveTrack(track);
@@ -44,7 +45,7 @@ public class TrackController {
         try{
             trackService.getTrackById(id);
             responseEntity=new ResponseEntity<String>("successfully created", HttpStatus.CREATED);
-        }catch(TrackAlreadyExistsException | TrackNotFoundException ex){
+        }catch(TrackNotFoundException ex){
             responseEntity=new ResponseEntity<String>(ex.getMessage(),HttpStatus.OK);
         }
         return responseEntity;

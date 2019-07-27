@@ -1,14 +1,12 @@
 package com.stackroute.Muzixapp;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//@SpringBootApplication
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
+@SpringBootApplication
+//@Configuration
+//@EnableAutoConfiguration
+//@ComponentScan
 public class MuzixAppApplication {
 
 	public static void main(String[] args) {

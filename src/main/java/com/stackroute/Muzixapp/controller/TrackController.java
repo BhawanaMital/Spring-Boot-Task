@@ -34,6 +34,24 @@ public class TrackController {
         }
         return responseEntity;
     }
+
+
+
+    @PutMapping("/tracklist")
+    public ResponseEntity<?> updateTracks(@RequestBody List<Track> tracks){
+        for (Track t:tracks){
+            try {
+                trackService.saveTrack(t);
+            } catch (TrackAlreadyExistsException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return  new ResponseEntity<List<?>>(tracks,HttpStatus.CREATED);
+    }
+
+
     @GetMapping("track")
     public ResponseEntity<?> getTracks(){
         return new ResponseEntity<List<Track>>(trackService.getAllTracks(),HttpStatus.OK);
@@ -63,4 +81,15 @@ public class TrackController {
         return new ResponseEntity<Track>(track,HttpStatus.OK);
     }
 
+
+    @PostMapping("tracks")
+    public ResponseEntity<?> getTracks(@RequestBody List<Track> track) throws RuntimeException,TrackAlreadyExistsException {
+        ResponseEntity responseEntity;
+        for(Track t:track)
+        {
+            trackService.saveTrack(t);
+        }
+        responseEntity = new ResponseEntity<List<Track>>(trackService.getAllTracks(), HttpStatus.CREATED);
+        return responseEntity;
+    }
 }

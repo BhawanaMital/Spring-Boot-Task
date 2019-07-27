@@ -6,12 +6,11 @@ import com.stackroute.Muzixapp.exception.TrackNotFoundException;
 import com.stackroute.Muzixapp.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@PropertySource("classpath:application.properties")
+
 public class TrackServiceImpl implements TrackService{
     @Value("${Track.trackId}")
     int trackId;
@@ -39,8 +38,8 @@ public class TrackServiceImpl implements TrackService{
 
     @Override
     public List<Track> getAllTracks() {
-        Track t = new Track(trackId, trackName, trackComments);
-        trackRepository.save(t);
+//        Track t = new Track(trackId, trackName, trackComments);
+//        trackRepository.save(t);
         return trackRepository.findAll();
     }
 

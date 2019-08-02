@@ -1,2 +1,2 @@
 # Spring-Boot-Task
-Global exception using Controller advice
+Mongo db connection in application properties.

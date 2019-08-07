@@ -17,10 +17,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Track
 {
     @Id
-    int trackId;
+    private int trackId;
     // @JsonProperty("name")
-    String trackName;
-    String trackComments;
+    private String trackName;
+    private String trackComments;
 
 //  @GeneratedValue //(strategy = GenerationType.AUTO)
 }

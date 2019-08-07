@@ -77,4 +77,21 @@ public class TrackServiceTest {
         List<Track> tracklist = trackService.getAllTracks();
         Assert.assertEquals(list, tracklist);
     }
+    
+      @Test
+   public void updateTrackTestSuccess() throws TrackNotFoundException
+    {
+        when(trackRepository.save(any())).thenReturn(track);
+      Track updateTrack=trackService.updateTrack(track);
+        Assert.assertEquals(track,updateTrack);
+       verify(trackRepository,times(1)).save(track);
+    }
+    @Test
+    public void deleteTrackTestSuccess() throws TrackNotFoundException
+    {
+        when(trackRepository.findById(any())).thenReturn(Optional.of(track));
+       boolean deleteTrack=trackService.deleteTrack(track.getId());
+       Assert.assertEquals(deleteTrack,true);
+       verify(trackRepository,times(1)).delete(track);
+    }
 }

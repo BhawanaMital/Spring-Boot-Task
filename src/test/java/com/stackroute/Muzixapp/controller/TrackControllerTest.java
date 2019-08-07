@@ -81,6 +81,24 @@ public class TrackControllerTest {
 
     }
 
+     @Test
+    public void updateUserSuccess() throws Exception
+    {
+        when(trackService.updateTrack(track)).thenReturn(track);
+        mvc.perform(MockMvcRequestBuilders.put("/api/v2/track")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+    @Test
+    public void deleteTrackSuccess() throws Exception
+    {
+        when(trackService.deleteTrack(track.getId())).thenReturn(true);
+        mvc.perform(MockMvcRequestBuilders.delete("/api/v2/track/{id}",track.getId())
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
+                .andDo(MockMvcResultHandlers.print());
+    }
     private static String asJsonString(final Object obj) {
         try{
             return new ObjectMapper().writeValueAsString(obj);

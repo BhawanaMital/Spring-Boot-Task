@@ -11,10 +11,10 @@ import javax.persistence.Id;
 public class Track
 {
     @Id
-    int trackId;
+    private int trackId;
     // @JsonProperty("name")
-    String trackName;
-    String trackComments;
+    private String trackName;
+    private String trackComments;
 
     public int getTrackId() {
         return trackId;

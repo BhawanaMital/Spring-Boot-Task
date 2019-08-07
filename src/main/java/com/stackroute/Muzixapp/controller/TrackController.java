@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/v2")
 public class TrackController {
-    TrackService trackService;
+    private TrackService trackService;
 
     @Autowired
     public TrackController(TrackService trackService) {
@@ -30,7 +30,7 @@ public class TrackController {
         return responseEntity;
     }
 
-    @GetMapping("track")
+    @GetMapping("tracks")
     public ResponseEntity<?> getTracks() {
         return new ResponseEntity<List<Track>>(trackService.getAllTracks(), HttpStatus.OK);
     }

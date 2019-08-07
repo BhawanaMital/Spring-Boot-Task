@@ -15,8 +15,8 @@ import javax.persistence.Id;
 @AllArgsConstructor
 public class Track {
     @Id
-    int trackId;
-    String trackName;
-    String trackComments;
+    private int trackId;
+    private String trackName;
+    private String trackComments;
 
 }
